@@ -1,4 +1,4 @@
-# AngularTpl
+# lan file share web ui
 
 ## Description
 
@@ -19,7 +19,7 @@ npm install
 $ npm run start
 
 # production mode.
-$ npm run build:prod && npx http-server ./dist/angular-tpl/
+$ npm run build:prod && npx http-server ./dist/lan-file-share-web-ui/
 ```
 
 ## Testing the app
