@@ -1,0 +1,32 @@
+<mat-list *ngIf="folderInfo; else loading">
+  <div mat-subheader>Folders</div>
+  <mat-list-item *ngFor="let folder of folderInfo.folders">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>{{ folder }}</div>
+    <!-- <div mat-line>{{ folder.updated | date }}</div> -->
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <div mat-subheader>Files</div>
+
+  <mat-list-item *ngFor="let file of folderInfo.files">
+    <mat-icon mat-list-icon>note</mat-icon>
+
+    <div mat-line>
+      <a
+        mat-button
+        [download]="file.fileName"
+        [innerText]="file.fileName"
+        [href]="getDownloadUrl(file.fileName)"
+        target="_blank"
+      >
+      </a>
+    </div>
+    <div mat-line>created: {{ file.createdAt | date }}</div>
+    <div mat-line>updated: {{ file.updatedAt | date }}</div>
+  </mat-list-item>
+</mat-list>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

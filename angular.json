@@ -73,7 +73,8 @@
               "browserTarget": "lan-file-share-web-ui:build:production"
             },
             "development": {
-              "browserTarget": "lan-file-share-web-ui:build:development"
+              "browserTarget": "lan-file-share-web-ui:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

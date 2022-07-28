@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ApiModule } from './api/api.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MaterialModule, CoreModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    ApiModule,
+    CoreModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
