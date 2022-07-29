@@ -14,13 +14,11 @@
 
     <div mat-line>
       <a
-        mat-button
+        mat-link
         [download]="file.fileName"
+        [href]="file.href"
         [innerText]="file.fileName"
-        [href]="getDownloadUrl(file.fileName)"
-        target="_blank"
-      >
-      </a>
+      ></a>
     </div>
     <div mat-line>created: {{ file.createdAt | date }}</div>
     <div mat-line>updated: {{ file.updatedAt | date }}</div>
