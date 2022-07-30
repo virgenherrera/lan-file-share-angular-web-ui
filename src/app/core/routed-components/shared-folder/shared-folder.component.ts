@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FolderInfo } from '../../../api/models/folder-info.model';
 import { SharedFolderService } from '../../../api/services/shared-folder.service';
+import { PathService } from '../../services/path.service';
 
 @Component({
   selector: 'app-shared-folder',
@@ -8,13 +9,32 @@ import { SharedFolderService } from '../../../api/services/shared-folder.service
   styleUrls: ['./shared-folder.component.sass'],
 })
 export class SharedFolderComponent implements OnInit {
-  private path = '';
   folderInfo: FolderInfo | null = null;
 
-  constructor(public sharedFolderService: SharedFolderService) {}
+  constructor(
+    private pathService: PathService,
+    private sharedFolderService: SharedFolderService,
+  ) {}
 
   ngOnInit(): void {
-    const folderInfo$ = this.sharedFolderService.getFolderInfo().subscribe({
+    this.pathSubscribe();
+  }
+
+  private pathSubscribe() {
+    const path$ = this.pathService.pathSubject.subscribe({
+      next: (path) => this.getFolderInfo(path),
+      complete: () => {
+        path$.unsubscribe();
+      },
+    });
+  }
+
+  setPath(path: string) {
+    this.pathService.path = path;
+  }
+
+  private getFolderInfo(path: string) {
+    const folderInfo$ = this.sharedFolderService.getFolderInfo(path).subscribe({
       next: (value) => {
         this.folderInfo = value;
       },

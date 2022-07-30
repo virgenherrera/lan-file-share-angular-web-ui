@@ -2,13 +2,18 @@
   <div mat-subheader>Folders</div>
   <mat-list-item *ngFor="let folder of folderInfo.folders">
     <mat-icon mat-list-icon>folder</mat-icon>
-    <div mat-line>{{ folder }}</div>
-    <!-- <div mat-line>{{ folder.updated | date }}</div> -->
+    <div mat-line>
+      <button
+        mat-button
+        (click)="setPath(folder)"
+        [innerText]="folder"
+      ></button>
+    </div>
   </mat-list-item>
+
   <mat-divider></mat-divider>
 
   <div mat-subheader>Files</div>
-
   <mat-list-item *ngFor="let file of folderInfo.files">
     <mat-icon mat-list-icon>note</mat-icon>
 
