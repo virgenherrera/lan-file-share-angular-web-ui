@@ -1,11 +1,23 @@
 <mat-list *ngIf="folderInfo; else loading">
   <div mat-subheader>Folders</div>
+
+  <mat-list-item *ngIf="path.parent">
+    <mat-icon mat-list-icon>subdirectory_arrow_left</mat-icon>
+    <div mat-line>
+      <button
+        mat-button
+        (click)="goToParent()"
+        [innerText]="path.parent.name"
+      ></button>
+    </div>
+  </mat-list-item>
+
   <mat-list-item *ngFor="let folder of folderInfo.folders">
     <mat-icon mat-list-icon>folder</mat-icon>
     <div mat-line>
       <button
         mat-button
-        (click)="setPath(folder)"
+        (click)="goToChild(folder)"
         [innerText]="folder"
       ></button>
     </div>

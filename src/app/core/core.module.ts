@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SharedFolderComponent } from './components/shared-folder/shared-folder.component';
 import { UploadFileDialogComponent } from './components/upload-file-dialog/upload-file-dialog.component';
 import { UploadFilesDialogComponent } from './components/upload-files-dialog/upload-files-dialog.component';
-import { SharedFolderComponent } from './routed-components/shared-folder/shared-folder.component';
 import { PathService } from './services/path.service';
 
 @NgModule({

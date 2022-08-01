@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Path } from '../models/path.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PathService {
-  readonly pathSubject = new BehaviorSubject('');
+  readonly pathSubject = new BehaviorSubject(new Path());
 
-  set path(value: string) {
-    this.pathSubject.next(value);
+  goToParent() {
+    const currentPath = this.pathSubject.value;
+
+    if (!currentPath.parent) {
+      throw new Error('already on <Home>');
+    }
+
+    const { parent: parentPath } = currentPath;
+    const nextValue = new Path(parentPath.path, parentPath.parent);
+
+    this.pathSubject.next(nextValue);
   }
 
-  get path(): string {
-    return this.pathSubject.value;
+  goToChild(folderName: string) {
+    const parentPath = this.pathSubject.value;
+    const nextPath = new Path(folderName, parentPath);
+
+    this.pathSubject.next(nextPath);
   }
 }
