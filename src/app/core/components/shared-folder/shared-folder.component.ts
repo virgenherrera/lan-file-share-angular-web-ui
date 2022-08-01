@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FolderInfo } from '../../../api/models/folder-info.model';
 import { SharedFolderService } from '../../../api/services/shared-folder.service';
+import { Path } from '../../models/path.model';
 import { PathService } from '../../services/path.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { PathService } from '../../services/path.service';
 })
 export class SharedFolderComponent implements OnInit {
   folderInfo: FolderInfo | null = null;
+  path!: Path;
 
   constructor(
     private pathService: PathService,
@@ -20,27 +22,26 @@ export class SharedFolderComponent implements OnInit {
     this.pathSubscribe();
   }
 
-  private pathSubscribe() {
-    const path$ = this.pathService.pathSubject.subscribe({
-      next: (path) => this.getFolderInfo(path),
-      complete: () => {
-        path$.unsubscribe();
-      },
-    });
+  goToChild(value: string) {
+    this.pathService.goToChild(value);
   }
 
-  setPath(path: string) {
-    this.pathService.path = path;
+  goToParent() {
+    this.pathService.goToParent();
+  }
+
+  private pathSubscribe() {
+    this.pathService.pathSubject.subscribe({
+      next: (path) => {
+        this.path = path;
+        this.getFolderInfo(path.path);
+      },
+    });
   }
 
   private getFolderInfo(path: string) {
-    const folderInfo$ = this.sharedFolderService.getFolderInfo(path).subscribe({
-      next: (value) => {
-        this.folderInfo = value;
-      },
-      complete: () => {
-        folderInfo$.unsubscribe();
-      },
-    });
+    this.sharedFolderService
+      .getFolderInfo(path)
+      .subscribe((value) => (this.folderInfo = value));
   }
 }
