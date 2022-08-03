@@ -1,10 +1,48 @@
-<h2 mat-dialog-title>Upload many files</h2>
+<mat-spinner *ngIf="!accept; else dialog"></mat-spinner>
 
-<mat-dialog-content class="mat-typography">
-  <p>upload-file-dialog works!</p>
-</mat-dialog-content>
+<ng-template #dialog>
+  <h2 mat-dialog-title>Upload a file</h2>
 
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Back</button>
-  <button mat-button [mat-dialog-close]="true">Upload</button>
-</mat-dialog-actions>
+  <mat-dialog-content class="mat-typography">
+    <mat-progress-bar
+      *ngIf="uploading; else uploadForm"
+      mode="indeterminate"
+    ></mat-progress-bar>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button color="warn" mat-dialog-close>Back</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!file"
+      (click)="uploadFile()"
+    >
+      Upload
+    </button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #uploadForm>
+  <mat-label class="button-label">Select your file</mat-label>
+
+  <button
+    mat-icon-button
+    (click)="fileInput.click()"
+    #tooltip="matTooltip"
+    matTooltip="Info about the action"
+    matTooltipPosition="right"
+  >
+    <mat-icon>cloud_upload</mat-icon>
+  </button>
+  <input
+    hidden
+    #fileInput
+    id="file"
+    type="file"
+    [accept]="accept"
+    (change)="inputFileChanged($event)"
+  />
+
+  <div class="error-message" *ngIf="fileError" [innerText]="fileError"></div>
+</ng-template>

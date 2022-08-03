@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SharedFolderComponent } from './components/shared-folder/shared-folder.component';
@@ -18,7 +17,7 @@ import { PathService } from './services/path.service';
     UploadFileDialogComponent,
     UploadFilesDialogComponent,
   ],
-  imports: [CommonModule, RouterModule, MaterialModule],
+  imports: [CommonModule, MaterialModule],
   exports: [NavBarComponent, SharedFolderComponent],
   providers: [PathService],
 })

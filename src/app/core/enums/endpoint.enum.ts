@@ -1,4 +1,5 @@
 export const enum Endpoint {
-  sharedFolder = 'multimedia/shared-folder/',
   file = 'multimedia/file/',
+  mimeTypes = 'multimedia/mime-types',
+  sharedFolder = 'multimedia/shared-folder/',
 }
