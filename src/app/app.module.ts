@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiModule } from './api/api.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { MaterialModule } from './material/material.module';
 
 @NgModule({
@@ -15,7 +16,7 @@ import { MaterialModule } from './material/material.module';
     ApiModule,
     CoreModule,
   ],
-  providers: [],
+  providers: [ApiInterceptor.provider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
