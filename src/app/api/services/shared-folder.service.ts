@@ -9,19 +9,19 @@ import { FolderInfo } from '../models/folder-info.model';
 })
 export class SharedFolderService {
   private endpoint = `/api/v1/${Endpoint.sharedFolder}`;
-  readonly FolderInfoSubject = new BehaviorSubject<FolderInfo>(null);
+  readonly folderInfoSubject = new BehaviorSubject<FolderInfo>(null);
 
   constructor(private http: HttpClient) {}
 
   getFolderInfo(path = ''): Observable<FolderInfo> {
-    this.FolderInfoSubject.next(null);
+    this.folderInfoSubject.next(null);
 
     const url = `${this.endpoint}${path}`;
 
     return this.http.get(url).pipe(
       map((res: any) => new FolderInfo(res)),
-      tap((info) => this.FolderInfoSubject.next(info)),
-      map(() => this.FolderInfoSubject.value),
+      tap((info) => this.folderInfoSubject.next(info)),
+      map(() => this.folderInfoSubject.value),
     );
   }
 }

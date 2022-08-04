@@ -41,7 +41,7 @@ export class SharedFolderComponent implements OnInit {
   }
 
   private folderInfoSubscribe() {
-    this.sharedFolderService.FolderInfoSubject.subscribe(
+    this.sharedFolderService.folderInfoSubject.subscribe(
       (folderInfo) => (this.folderInfo = folderInfo),
     );
   }
