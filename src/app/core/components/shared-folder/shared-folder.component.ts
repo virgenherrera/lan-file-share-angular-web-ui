@@ -10,8 +10,8 @@ import { PathService } from '../../services/path.service';
   styleUrls: ['./shared-folder.component.sass'],
 })
 export class SharedFolderComponent implements OnInit {
-  folderInfo: FolderInfo;
-  path: Path;
+  folderInfo: FolderInfo | null = null;
+  path!: Path;
 
   constructor(
     private pathService: PathService,
@@ -20,7 +20,6 @@ export class SharedFolderComponent implements OnInit {
 
   ngOnInit(): void {
     this.pathSubscribe();
-    this.folderInfoSubscribe();
   }
 
   goToChild(value: string) {
@@ -40,13 +39,9 @@ export class SharedFolderComponent implements OnInit {
     });
   }
 
-  private folderInfoSubscribe() {
-    this.sharedFolderService.FolderInfoSubject.subscribe(
-      (folderInfo) => (this.folderInfo = folderInfo),
-    );
-  }
-
   private getFolderInfo(path: string) {
-    this.sharedFolderService.getFolderInfo(path).subscribe();
+    this.sharedFolderService
+      .getFolderInfo(path)
+      .subscribe((value) => (this.folderInfo = value));
   }
 }
