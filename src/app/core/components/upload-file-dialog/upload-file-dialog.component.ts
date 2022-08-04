@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { MimeTypesService } from '../../../api/services/mime-types.service';
+import { SharedFolderService } from '../../../api/services/shared-folder.service';
 import { UploadService } from '../../../api/services/upload.service';
 import { PathService } from '../../services/path.service';
 
@@ -23,6 +24,7 @@ export class UploadFileDialogComponent implements OnInit {
     private mimeTypesService: MimeTypesService,
     private pathService: PathService,
     private uploadService: UploadService,
+    private sharedFolderService: SharedFolderService,
   ) {}
 
   ngOnInit(): void {
@@ -43,9 +45,14 @@ export class UploadFileDialogComponent implements OnInit {
 
     return this.uploadService
       .file(this.file, path)
-      .pipe(tap((message) => this.matSnackBar.open(message)))
+      .pipe(
+        tap((message) =>
+          this.matSnackBar.open(message, 'dismiss', { duration: 7e3 }),
+        ),
+        switchMap(() => this.sharedFolderService.getFolderInfo(path)),
+      )
       .subscribe({
-        next: (data) => this.dialogRef.close(data),
+        next: () => this.dialogRef.close(true),
         error: this.uploadFileError.bind(this),
       });
   }
