@@ -5,7 +5,7 @@
     <mat-icon mat-list-icon>subdirectory_arrow_left</mat-icon>
     <div mat-line>
       <button
-        mat-button
+        mat-stroked-button
         (click)="goToParent()"
         [innerText]="path.parent.name"
       ></button>
@@ -16,7 +16,7 @@
     <mat-icon mat-list-icon>folder</mat-icon>
     <div mat-line>
       <button
-        mat-button
+        mat-stroked-button
         (click)="goToChild(folder)"
         [innerText]="folder"
       ></button>
