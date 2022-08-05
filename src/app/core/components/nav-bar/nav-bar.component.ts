@@ -4,7 +4,6 @@ import {
   MatDialogConfig,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { UploadFileDialogComponent } from '../upload-file-dialog/upload-file-dialog.component';
 import { UploadFilesDialogComponent } from '../upload-files-dialog/upload-files-dialog.component';
 
@@ -14,8 +13,8 @@ import { UploadFilesDialogComponent } from '../upload-files-dialog/upload-files-
   styleUrls: ['./nav-bar.component.sass'],
 })
 export class NavBarComponent {
-  @ViewChild('uploadMenuTrigger', { static: false })
-  uploadMenuTrigger!: MatMenuTrigger & ElementRef;
+  @ViewChild('uploadMenuTrigger', { read: ElementRef })
+  uploadMenuTrigger: ElementRef;
 
   private dialogOptions: MatDialogConfig = { restoreFocus: false };
 
@@ -27,7 +26,7 @@ export class NavBarComponent {
       this.dialogOptions,
     );
 
-    this.focusOnDialogDismiss(dialogRef);
+    this.handleDialogDismiss(dialogRef);
   }
 
   openUploadFiles() {
@@ -36,10 +35,10 @@ export class NavBarComponent {
       this.dialogOptions,
     );
 
-    this.focusOnDialogDismiss(dialogRef);
+    this.handleDialogDismiss(dialogRef);
   }
 
-  private focusOnDialogDismiss(ref: MatDialogRef<any | any>) {
+  private handleDialogDismiss(ref: MatDialogRef<any | any>) {
     return ref
       .afterClosed()
       .subscribe((result) =>
