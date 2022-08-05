@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +17,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   exports: MaterialModule.imports as NgModule['exports'],
 })
 export class MaterialModule {
-  static imports: NgModule['imports'] = [
+  static readonly imports: NgModule['imports'] = [
+    MatButtonModule,
     MatDialogModule,
     MatGridListModule,
     MatIconModule,
