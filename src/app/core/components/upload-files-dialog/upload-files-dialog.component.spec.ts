@@ -8,9 +8,8 @@ describe('UploadFilesDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UploadFilesDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [UploadFilesDialogComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UploadFilesDialogComponent);
     component = fixture.componentInstance;

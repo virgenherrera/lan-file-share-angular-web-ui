@@ -7,7 +7,7 @@ import { PathService } from '../../services/path.service';
 @Component({
   selector: 'app-shared-folder',
   templateUrl: './shared-folder.component.html',
-  styleUrls: ['./shared-folder.component.sass'],
+  styleUrls: ['./shared-folder.component.scss'],
 })
 export class SharedFolderComponent implements OnInit {
   folderInfo: FolderInfo;

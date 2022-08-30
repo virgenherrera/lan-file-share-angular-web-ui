@@ -8,9 +8,8 @@ describe('SharedFolderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SharedFolderComponent ]
-    })
-    .compileComponents();
+      declarations: [SharedFolderComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SharedFolderComponent);
     component = fixture.componentInstance;

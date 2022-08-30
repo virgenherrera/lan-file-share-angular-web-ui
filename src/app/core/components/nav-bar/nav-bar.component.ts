@@ -10,7 +10,7 @@ import { UploadFilesDialogComponent } from '../upload-files-dialog/upload-files-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.sass'],
+  styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent {
   @ViewChild('uploadMenuTrigger', { read: ElementRef })
