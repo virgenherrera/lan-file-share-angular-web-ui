@@ -10,7 +10,7 @@ import { PathService } from '../../services/path.service';
 @Component({
   selector: 'app-upload-file-dialog',
   templateUrl: './upload-file-dialog.component.html',
-  styleUrls: ['./upload-file-dialog.component.sass'],
+  styleUrls: ['./upload-file-dialog.component.scss'],
 })
 export class UploadFileDialogComponent implements OnInit {
   accept: string | null = null;
