@@ -8,7 +8,7 @@ import { FilesResponse } from '../models/files-response.model';
   providedIn: 'root',
 })
 export class UploadService {
-  private readonly apiUrl = '/api/v1/';
+  private readonly apiUrl = '/api/v1';
 
   constructor(private http: HttpClient) {}
 

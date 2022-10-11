@@ -7,7 +7,7 @@ import { UploadRoute } from '../enums/endpoint.enum';
   providedIn: 'root',
 })
 export class MimeTypesService {
-  private endpoint = `/api/v1/${UploadRoute.mimeTypes}`;
+  private endpoint = `/api/v1${UploadRoute.mimeTypes}`;
 
   constructor(private http: HttpClient) {}
 

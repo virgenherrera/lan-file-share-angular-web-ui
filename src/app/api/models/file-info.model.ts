@@ -9,7 +9,7 @@ export class FileInfo {
   updatedAt!: Date;
 
   constructor({ fileName, path, size, createdAt, updatedAt }: FileInfo) {
-    const href = `/api/v1/${SharedFolderRoute.fileStream}?path=${path}`;
+    const href = `/api/v1${SharedFolderRoute.fileStream}?path=${path}`;
 
     Object.assign(this, { fileName, href, path, size, createdAt, updatedAt });
   }
