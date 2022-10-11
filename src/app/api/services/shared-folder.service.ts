@@ -8,7 +8,7 @@ import { FolderInfo } from '../models/folder-info.model';
   providedIn: 'root',
 })
 export class SharedFolderService {
-  private endpoint = `/api/v1/${SharedFolderRoute.sharedFolder}`;
+  private endpoint = `/api/v1${SharedFolderRoute.sharedFolder}`;
   readonly folderInfoSubject = new BehaviorSubject<FolderInfo>(null);
 
   constructor(private http: HttpClient) {}
