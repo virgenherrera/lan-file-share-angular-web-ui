@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { Endpoint } from '../../core/enums/endpoint.enum';
+import { UploadRoute } from '../enums/endpoint.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MimeTypesService {
-  private endpoint = `/api/v1/${Endpoint.mimeTypes}`;
+  private endpoint = `/api/v1/${UploadRoute.mimeTypes}`;
 
   constructor(private http: HttpClient) {}
 
