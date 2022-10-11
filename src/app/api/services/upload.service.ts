@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { Endpoint } from '../../core/enums/endpoint.enum';
+import { UploadRoute } from '../enums/endpoint.enum';
 import { FilesResponse } from '../models/files-response.model';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class UploadService {
   constructor(private http: HttpClient) {}
 
   file(file: File, path = '') {
-    const url = `${this.apiUrl}${Endpoint.file}`;
+    const url = `${this.apiUrl}${UploadRoute.file}`;
     const formData = new FormData();
 
     formData.append('file', file);
@@ -25,7 +25,7 @@ export class UploadService {
   }
 
   files(files: File[], path = '') {
-    const url = `${this.apiUrl}${Endpoint.files}`;
+    const url = `${this.apiUrl}${UploadRoute.files}`;
     const formData = new FormData();
 
     files.forEach((file) => formData.append('file[]', file));
