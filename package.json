@@ -20,7 +20,7 @@
     "local:ci": "run-s -l check:* build:prod"
   },
   "dependencies": {
-    "@angular/animations": "^14.2.5",
+    "@angular/animations": "^14.2.6",
     "@angular/cdk": "~14.2.4",
     "@angular/common": "^14.2.5",
     "@angular/compiler": "^14.2.5",
