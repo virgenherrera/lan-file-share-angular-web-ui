@@ -46,8 +46,8 @@ export class UploadFileDialogComponent implements OnInit {
     return this.uploadService
       .file(this.file, path)
       .pipe(
-        tap((message) =>
-          this.matSnackBar.open(message, 'dismiss', { duration: 7e3 }),
+        tap((res) =>
+          this.matSnackBar.open(res.message, 'dismiss', { duration: 7e3 }),
         ),
         switchMap(() => this.sharedFolderService.getFolderInfo(path)),
       )

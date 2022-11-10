@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { from, reduce, switchMap } from 'rxjs';
 import { UploadRoute } from '../enums/endpoint.enum';
 
 @Injectable({
@@ -12,9 +12,9 @@ export class MimeTypesService {
   constructor(private http: HttpClient) {}
 
   get() {
-    return this.http
-      .get(this.endpoint)
-      .pipe(map((res: any) => res.data as string[]))
-      .pipe(map((mimeTypes) => mimeTypes.join(', ')));
+    return this.http.get(this.endpoint).pipe(
+      switchMap((res) => from(res as string[])),
+      reduce((acc, curr) => `${acc}, ${curr}`, ''),
+    );
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { UploadRoute } from '../enums/endpoint.enum';
 import { FilesResponse } from '../models/files-response.model';
+import { UploadResponse } from '../models/upload-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class UploadService {
 
     return this.http
       .post(url, formData)
-      .pipe(map((res: any) => res.data as string));
+      .pipe(map((res: any) => new UploadResponse(res)));
   }
 
   files(files: File[], path = '') {
