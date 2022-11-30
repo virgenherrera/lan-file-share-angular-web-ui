@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { switchMap, tap } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
 import { MimeTypesService } from '../../../api/services/mime-types.service';
 import { SharedFolderService } from '../../../api/services/shared-folder.service';
 import { UploadService } from '../../../api/services/upload.service';
@@ -12,8 +12,9 @@ import { PathService } from '../../services/path.service';
   templateUrl: './upload-file-dialog.component.html',
   styleUrls: ['./upload-file-dialog.component.scss'],
 })
-export class UploadFileDialogComponent implements OnInit {
-  accept: string | null = null;
+export class UploadFileDialogComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
+  accept: string;
   file: File = null;
   fileError: string = null;
   uploading = false;
@@ -28,7 +29,15 @@ export class UploadFileDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mimeTypesService.get().subscribe((accept) => (this.accept = accept));
+    this.subscriptions.push(
+      this.mimeTypesService
+        .getAllowedTypes()
+        .subscribe((accept) => (this.accept = accept)),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   inputFileChanged($event: any) {
