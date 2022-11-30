@@ -1,20 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, reduce, switchMap } from 'rxjs';
+import { BehaviorSubject, map, of, reduce, switchMap, tap } from 'rxjs';
 import { UploadRoute } from '../enums/endpoint.enum';
+import { MimeTypesResponse } from '../models/mime-types.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MimeTypesService {
   private endpoint = `/api/v1${UploadRoute.mimeTypes}`;
+  private mimeTypesRes$ = new BehaviorSubject<MimeTypesResponse>(null);
 
   constructor(private http: HttpClient) {}
 
   get() {
-    return this.http.get(this.endpoint).pipe(
-      switchMap((res) => from(res as string[])),
+    return of(this.mimeTypesRes$.value).pipe(
+      switchMap((value) => (value ? of(value) : this.requestMimeTypes())),
+    );
+  }
+
+  getAllowedTypes() {
+    return this.get().pipe(
+      map((res) => of(Object.values(res).flat())),
       reduce((acc, curr) => `${acc}, ${curr}`, ''),
     );
+  }
+
+  private requestMimeTypes() {
+    return this.http
+      .get<MimeTypesResponse>(this.endpoint)
+      .pipe(tap((res) => this.mimeTypesRes$.next(res)));
   }
 }

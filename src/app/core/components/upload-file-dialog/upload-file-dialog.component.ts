@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { switchMap, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { MimeTypesService } from '../../../api/services/mime-types.service';
 import { SharedFolderService } from '../../../api/services/shared-folder.service';
 import { UploadService } from '../../../api/services/upload.service';
@@ -13,7 +13,7 @@ import { PathService } from '../../services/path.service';
   styleUrls: ['./upload-file-dialog.component.scss'],
 })
 export class UploadFileDialogComponent implements OnInit {
-  accept: string | null = null;
+  accept$: Observable<string>;
   file: File = null;
   fileError: string = null;
   uploading = false;
@@ -28,7 +28,7 @@ export class UploadFileDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mimeTypesService.get().subscribe((accept) => (this.accept = accept));
+    this.accept$ = this.mimeTypesService.getAllowedTypes();
   }
 
   inputFileChanged($event: any) {

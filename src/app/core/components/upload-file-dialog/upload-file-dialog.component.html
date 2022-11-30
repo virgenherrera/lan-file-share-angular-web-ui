@@ -40,7 +40,7 @@
     #fileInput
     id="file"
     type="file"
-    [accept]="accept"
+    [accept]="accept$ | async"
     (change)="inputFileChanged($event)"
   />
 
